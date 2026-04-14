@@ -33,8 +33,11 @@ export const Goods: React.FC<GoodsProps> = ({ goods }) => (
 // type SortField = '' | 'alphabetically' | 'length';
 
 export const App: React.FC = () => {
-  // const [ld] = useState('');
-  const [sortField, setSortField] = useState('');
+  enum SortType { None = '',
+    Alphabetically = 'alphabetically',
+    ByLength = 'length' }
+  const [sortField, setSortField] = useState<SortType>(SortType.None);
+
   const [reversed, setReversed] = useState(false);
 
   const sortAlphabetically = () => setSortField('alphabetically');
@@ -49,11 +52,11 @@ export const App: React.FC = () => {
   const getVisibleGoods = (): string[] => {
     const goods = [...goodsFromServer];
 
-    if (sortField === 'alphabetically') {
+    if (sortField === SortType.Alphabetically) {
       goods.sort((a, b) => a.localeCompare(b));
     }
 
-    if (sortField === 'length') {
+    if (sortField === SortType.ByLength) {
       goods.sort((a, b) => a.length - b.length);
     }
 
