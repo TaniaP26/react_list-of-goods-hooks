@@ -30,22 +30,22 @@ export const Goods: React.FC<GoodsProps> = ({ goods }) => (
   </ul>
 );
 
-// type SortField = '' | 'alphabetically' | 'length';
-
 export const App: React.FC = () => {
-  enum SortType { None = '',
+  enum SortType {
+    None = '',
     Alphabetically = 'alphabetically',
-    ByLength = 'length' }
+    ByLength = 'length',
+  }
   const [sortField, setSortField] = useState<SortType>(SortType.None);
 
   const [reversed, setReversed] = useState(false);
 
-  const sortAlphabetically = () => setSortField('alphabetically');
-  const sortByLength = () => setSortField('length');
+  const sortAlphabetically = () => setSortField(SortType.Alphabetically);
+  const sortByLength = () => setSortField(SortType.ByLength);
   const toggleReverse = () => setReversed(prev => !prev);
 
   const resetGoods = () => {
-    setSortField('');
+    setSortField(SortType.None);
     setReversed(false);
   };
 
